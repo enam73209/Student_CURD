@@ -182,7 +182,7 @@ const StudentForm = () => {
                         {/* Rest of your form */}
                         {/* ... */}
                         <Form.Group className="mt-3">
-                            <Button variant="success" className="w-100" type="submit">
+                            <Button variant="success"  className="w-100 btn-outline-warning" type="submit">
                                 Submit
                             </Button>
                         </Form.Group>
