@@ -1,10 +1,11 @@
 import React from 'react';
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
+import '../assets/css/AppNavBar.css'
 
 const AppNavBar = () => {
     return (
-        <Navbar bg="dark" data-bs-theme="dark">
+        <Navbar bg="dark" data-bs-theme="dark"  className="appNavBar">
             <Container>
                 <Navbar.Brand href="#home">Student CURD</Navbar.Brand>
                 <Nav className="me-auto">

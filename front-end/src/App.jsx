@@ -2,6 +2,7 @@ import { useState } from 'react'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import StudentListPage from "./pages/StudentListPage.jsx";
 import StudentRegistrationPage from "./pages/StudentRegistrationPage.jsx";
+import '../src/assets/css/StudentForm.css'
 
 
 function App() {

@@ -3,8 +3,16 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import {toast, Toaster} from "react-hot-toast";
 import {CreateStudentRequest, ListStudentByIDRequest, StudentUpdate} from "../APIRequest/APIRequest.js";
 import {useNavigate} from "react-router";
+import FormImg from '../assets/img/library1.jpg'
 
 const StudentForm = () => {
+    const formStyle = {
+        backgroundImage: `url(${FormImg})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+
+    };
+
     const Navigate = useNavigate();
     const[studentFormData, SetStudentFormData]=useState({firstName:"", lastName:"", gender:"", dateOfBirth:"", nationality:"", address:"", phone:"", admissionDate:"", courses:""});
     const[updateId,setUpdateId]=useState(null);
@@ -101,92 +109,88 @@ const StudentForm = () => {
 
 
     return (
-        <div className="container mt-5">
+        <div className="container ">
+            <h1 className="display-4 text-center my-4">Student Registration Form</h1>
             <div className="row">
-                <Form onSubmit={(e) => {
-                    e.preventDefault(); // Prevent default form submission behavior
-                    StudentFormSubmit(); // Call your validation function
-                }}>
-                    <Row>
-                        <Col md={6}>
-                            <Form.Group controlId="firstName">
-                                <Form.Label>First Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter First Name" value={studentFormData['firstName']} onChange={(e)=>formOnChange('firstName',e.target.value)} />
-                            </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                            <Form.Group controlId="lastName">
-                                <Form.Label>Last Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter Last Name" value={studentFormData['lastName']} onChange={(e)=>formOnChange('lastName',e.target.value)} />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                            <Form.Group controlId="gender">
-                                <Form.Label>Gender</Form.Label>
-                                <Form.Control as="select" value={studentFormData['gender']} onChange={(e)=>formOnChange('gender',e.target.value)}>
-                                    <option value="">Select Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                </Form.Control>
-                            </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                            <Form.Group controlId="dob">
-                                <Form.Label>Date of Birth</Form.Label>
-                                <Form.Control type="date" value={studentFormData['dateOfBirth']} onChange={(e)=>formOnChange('dateOfBirth',e.target.value)}/>
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                            <Form.Group controlId="nationality">
-                                <Form.Label>Nationality</Form.Label>
-                                <Form.Control type="text" placeholder="Enter Nationality" value={studentFormData['nationality']} onChange={(e)=>formOnChange('nationality',e.target.value)} />
-                            </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                            <Form.Group controlId="address">
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control type="text" placeholder="Enter Address"  value={studentFormData['address']} onChange={(e)=>formOnChange('address',e.target.value)}/>
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                            <Form.Group controlId="phone">
-                                <Form.Label>Phone</Form.Label>
-                                <Form.Control type="text" placeholder="Enter Phone Number" value={studentFormData['phone']} onChange={(e)=>formOnChange('phone',e.target.value)}/>
-                            </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                            <Form.Group controlId="admissionDate">
-                                <Form.Label>Admission Date</Form.Label>
-                                <Form.Control type="date"  value={studentFormData['admissionDate']} onChange={(e)=>formOnChange('admissionDate', e.target.value)}/>
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                            <Form.Group controlId="course">
-                                <Form.Label>Course</Form.Label>
-                                <Form.Control type="text" placeholder="Your Course" value={studentFormData['courses']} onChange={(e)=>formOnChange('courses',e.target.value)} />
-                            </Form.Group>
-                        </Col>
+                <div className="col-md-12 border rounded p-4" style={formStyle} >
+                    <Form onSubmit={(e) => {
+                        e.preventDefault();
+                        StudentFormSubmit();
+                    }}>
+                        {/* Your form fields */}
+                        <Row className="mb-3">
+                            <Col md={6}>
+                                <Form.Group controlId="firstName">
+                                    <Form.Label className="white-label">First Name</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter First Name" value={studentFormData['firstName']} onChange={(e)=>formOnChange('firstName',e.target.value)} />
+                                </Form.Group>
+                            </Col>
+                            <Col md={6}>
+                                <Form.Group controlId="lastName">
+                                    <Form.Label className="white-label">Last Name</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter Last Name" value={studentFormData['lastName']} onChange={(e)=>formOnChange('lastName',e.target.value)} />
+                                </Form.Group>
+                            </Col>
+                            <Col md={6}>
+                                <Form.Group controlId="gender">
+                                    <Form.Label className="white-label">Gender</Form.Label>
+                                    <Form.Control as="select" value={studentFormData['gender']} onChange={(e)=>formOnChange('gender',e.target.value)}>
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </Form.Control>
+                                </Form.Group>
+                            </Col>
+                            <Col md={6}>
+                                <Form.Group controlId="dob">
+                                    <Form.Label className="white-label">Date of Birth</Form.Label>
+                                    <Form.Control type="date" value={studentFormData['dateOfBirth']} onChange={(e)=>formOnChange('dateOfBirth',e.target.value)}/></Form.Group>
+                            </Col>
+                            <Col md={6}>
+                                <Form.Group controlId="nationality">
+                                    <Form.Label className="white-label">Nationality</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter Nationality" value={studentFormData['nationality']} onChange={(e)=>formOnChange('nationality',e.target.value)} /></Form.Group>
+                            </Col>
+                            <Col md={6}>
+                                <Form.Group controlId="address">
+                                    <Form.Label className="white-label">Address</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter Address"  value={studentFormData['address']} onChange={(e)=>formOnChange('address',e.target.value)}/>
+                                </Form.Group>
+                            </Col>
+                            <Col md={6}>
+                                <Form.Group controlId="phone">
+                                    <Form.Label className="white-label">Phone</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter Phone Number" value={studentFormData['phone']} onChange={(e)=>formOnChange('phone',e.target.value)}/>
+                                </Form.Group>
+                            </Col>
+                            <Col md={6}>
+                                <Form.Group controlId="admissionDate">
+                                    <Form.Label className="white-label">Admission Date</Form.Label>
+                                    <Form.Control type="date"  value={studentFormData['admissionDate']} onChange={(e)=>formOnChange('admissionDate', e.target.value)}/>
+                                </Form.Group>
+                            </Col>
+                            <Col md={6}>
+                                <Form.Group controlId="course">
+                                    <Form.Label className="white-label">Course</Form.Label>
+                                    <Form.Control type="text" placeholder="Your Course" value={studentFormData['courses']} onChange={(e)=>formOnChange('courses',e.target.value)} />
+                                </Form.Group>
+                            </Col>
 
-                    </Row>
+                            {/* Other form fields similar to the above */}
+                        </Row>
+                        {/* Rest of your form */}
+                        {/* ... */}
+                        <Form.Group className="mt-3">
+                            <Button variant="success" className="w-100" type="submit">
+                                Submit
+                            </Button>
+                        </Form.Group>
+                    </Form>
+                </div>
 
-                    <Form.Group className="mt-3">
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
-                    </Form.Group>
-
-                </Form>
             </div>
-            <Toaster position="bottom-center"/>
+            <Toaster position="bottom-center" />
         </div>
     );
 };
