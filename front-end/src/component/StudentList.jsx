@@ -58,7 +58,7 @@ const StudentList = () => {
                                     {studentData.map((item,i) => (
                                         <tr key={i}>
                                             <td>{item['firstName']}</td>
-                                            <td>{item['firstName']}</td>
+                                            <td>{item['lastName']}</td>
                                             <td>{item['gender']}</td>
                                             <td>{item['dateOfBirth']}</td>
                                             <td>{item['nationality']}</td>

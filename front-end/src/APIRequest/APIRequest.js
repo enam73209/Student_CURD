@@ -27,13 +27,43 @@ export const DeleteStudent = async (id)=>{
         }
 }
 
-export const CreateStudent = async (postBody)=>{
+export const CreateStudentRequest = async (postBody)=>{
     try {
         let res = await axios.post('http://localhost:5010/api/v1/create-student',postBody);
         if(res.data['status']==="success"){
             return true
         }
         else{
+            return false
+        }
+    }catch (e) {
+        return false;
+    }
+}
+
+
+export const ListStudentByIDRequest = async (id)=>{
+    try{
+        let res =await axios.get('http://localhost:5010/api/v1/student-by-id/'+id);
+        if(res.data['status']==="success"){
+            return res.data['data'][0];
+        }
+        else{
+            return false
+        }
+    }catch (e) {
+        return false
+    }
+}
+
+export const StudentUpdate=async (id,postBody)=>{
+    const query = {_id:id};
+    try{
+        let res = await axios.post('http://localhost:5010/api/v1/update-student/'+id,postBody);
+        if(res.data.status === "success"){
+            return true;
+        }
+        else {
             return false
         }
     }catch (e) {

@@ -1,25 +1,45 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import {toast, Toaster} from "react-hot-toast";
-import {CreateStudent} from "../APIRequest/APIRequest.js";
+import {CreateStudentRequest, ListStudentByIDRequest, StudentUpdate} from "../APIRequest/APIRequest.js";
 import {useNavigate} from "react-router";
 
 const StudentForm = () => {
     const Navigate = useNavigate();
-    const[studentFormData, SaveStudentFormData]=useState({firstName:"", lastName:"", gender:"", dateOfBirth:"", nationality:"", address:"", phone:"", admissionDate:"", courses:""});
+    const[studentFormData, SetStudentFormData]=useState({firstName:"", lastName:"", gender:"", dateOfBirth:"", nationality:"", address:"", phone:"", admissionDate:"", courses:""});
+    const[updateId,setUpdateId]=useState(null);
+
+    useEffect(() => {
+        (async ()=>{
+            const urlParams =new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            setUpdateId(id);
+            if(id!==null){
+                await fillForm(id);
+            }
+        })()
+    }, []);
+
+
+    // Fill the form method if User try to update an existing user
+    const fillForm=async (id)=>{
+            let result = await ListStudentByIDRequest(id);
+            SetStudentFormData(result);
+
+    }
 
     //Getting Data from Input Field and save in state
     const formOnChange = (name,value)=>{
-        SaveStudentFormData((studentFormData)=>({
+        SetStudentFormData((studentFormData)=>({
             ...studentFormData,
             [name]:value
         }))
 
     }
-    console.log(studentFormData);
    //Student form Submit to API
    const StudentFormSubmit=async ()=>{
        try{
+
           if(studentFormData['firstName'].length ===0){
                 toast.error("First Name is required");
           }
@@ -51,15 +71,27 @@ const StudentForm = () => {
               toast.error("course  is required");
           }
           else{
-              const result = await CreateStudent(studentFormData);
-              console.log(result);
-              if(result){
-                  toast.success("student created successfully");
-                  Navigate("/")
+              if(updateId ===null){
+                  const result = await CreateStudentRequest(studentFormData);
+                  if(result){
+                      toast.success("student created successfully");
+                      Navigate("/")
+                  }
+                  else {
+                      toast.error("Something Went wrong ! Please try again Later");
+                  }
               }
-              else {
-                  toast.error("Something Went wrong ! Please try again Later");
+              else{
+                    const result = await StudentUpdate(updateId,studentFormData);
+                    if(result){
+                        toast.success("Student updated successfully");
+                        Navigate("/");
+                    }
+                    else{
+                        toast.error("Something went wrong")
+                    }
               }
+
           }
 
        }catch (e) {
