@@ -27,3 +27,17 @@ export const DeleteStudent = async (id)=>{
         }
 }
 
+export const CreateStudent = async (postBody)=>{
+    try {
+        let res = await axios.post('http://localhost:5010/api/v1/create-student',postBody);
+        if(res.data['status']==="success"){
+            return true
+        }
+        else{
+            return false
+        }
+    }catch (e) {
+        return false;
+    }
+}
+
